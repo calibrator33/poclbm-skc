@@ -63,7 +63,7 @@ class GetworkSource(Source):
 				break
 
 	def ensure_connected(self, connection, proto, host):
-		if connection != None and connection.sock != None:
+		if connection is not None and connection.sock is not None:
 			return connection, False
 
 		if proto == 'https': connector = httplib.HTTPSConnection
@@ -113,7 +113,7 @@ class GetworkSource(Source):
 			if result['error']:
 				say_line('server error: %s', result['error']['message'])
 				raise RPCError(result['error']['message'])
-			return (connection, result)
+			return connection, result
 		finally:
 			if not result or not response or (response.version == 10 and response.getheader('connection', '') != 'keep-alive') or response.getheader('connection', '') == 'close':
 				connection.close()
@@ -152,7 +152,7 @@ class GetworkSource(Source):
 	def send_internal(self, result, nonce):
 		data = ''.join([result.header.encode('hex'), pack('<3I', long(result.time), long(result.difficulty), long(nonce)).encode('hex'), '000000800000000000000000000000000000000000000000000000000000000000000000000000000000000080020000'])
 		accepted = self.getwork(data)
-		if accepted != None:
+		if accepted is not None:
 			self.switch.report(result.miner, nonce, accepted)
 			return True
 

@@ -5,7 +5,7 @@ class Object(object):
 	pass
 
 def uint32(x):
-	return x & 0xffffffffL
+	return x % 0x100000000L
 
 def bytereverse(x):
 	return uint32(( ((x) << 24) | (((x) << 8) & 0x00ff0000) | (((x) >> 8) & 0x0000ff00) | ((x) >> 24) ))

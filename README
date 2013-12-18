@@ -1,4 +1,27 @@
-Usage: poclbm.py [OPTION]... SERVER[#tag]...
+POCLBM-SKC
+
+OpenCL kernel developed by reorder
+
+
+Installation:
+
+1. Ensure that you are using Python 2.5, 2.6 or 2.7
+
+2. Compile the skeinhash library in the skeinhash folder
+
+   cd skeinhash
+   gcc -fPIC -shared -o skeinhash.so *.c
+   
+3. To monitor your GPU temperature, install the ADL3 library found at
+   https://github.com/mjmvisser/adl3
+   
+   Install with "pip install adl3", or copy the 'adl3' folder from
+   github to the main folder of poclbm-skc
+
+ 
+Usage: 
+
+poclbm.py [OPTION]... SERVER[#tag]...
 SERVER is one or more [http[s]|stratum://]user:pass@host:port          (required)
 [#tag] is a per SERVER user friendly name displayed in stats (optional)
 
@@ -49,4 +72,3 @@ Options:
                         lag
     -s FRAMESLEEP, --sleep=FRAMESLEEP
                         sleep per frame in seconds, default 0
-    -v, --vectors       use vectors
