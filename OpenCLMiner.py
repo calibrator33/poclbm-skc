@@ -336,7 +336,7 @@ class OpenCLMiner(Miner):
             say_line("Worksize: %d" % self.worksize)
 
     def queue_kernel_parameters(self, work):
-        state = skeinhashmid(pack('>16I', *work.dataX[:16]))
+        state = work.midstate
         
         for i in xrange(8):
             self.kernel.set_arg(i, state[i * 8:i * 8 + 8])

@@ -1,6 +1,6 @@
 from copy import copy
 from log import say_exception, say_line, say_quiet
-from skeinhash import skeinhash
+from skeinhash import skeinhash, skeinhashmid
 # from sha256 import hash, sha256, STATE
 from struct import pack, unpack
 from threading import RLock
@@ -160,6 +160,7 @@ class Switch(object):
 
             job.headerX = binary_data[:76]
             job.dataX = unpack('<19I', job.headerX)
+            job.midstate = skeinhashmid(pack('>16I', *job.dataX[:16]))
             job.target		= unpack('<8I', target.decode('hex'))
             job.header		= binary_data[:68]
             job.merkle_end	= uint32(unpack('<I', binary_data[64:68])[0])
