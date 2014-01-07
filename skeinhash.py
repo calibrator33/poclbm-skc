@@ -1,18 +1,13 @@
-import ctypes
-
-_shlib = ctypes.CDLL('./skeinhash/skeinhash.so')
+import hashlib
+import struct
+import skein
 
 def skeinhash(msg):
-    msgb = ctypes.create_string_buffer(msg)
-    hashb = ctypes.create_string_buffer(32)
-    _shlib.skeinhash(hashb, msgb, len(msg))
-    return hashb.raw
+    return hashlib.sha256(skein.Skein512(msg[:80]).digest()).digest()
 
 def skeinhashmid(msg):
-    msgb = ctypes.create_string_buffer(msg[:64])
-    hashb = ctypes.create_string_buffer(64)
-    _shlib.skeinhashmid(hashb, msgb, 64)
-    return hashb.raw
+    s = skein.Skein512(msg[:64] + '\x00') # hack to force Skein512.update()
+    return struct.pack('<8Q', *s.tf.key.tolist())
 
 if __name__ == '__main__':
     mesg = "dissociative1234dissociative4567dissociative1234dissociative4567dissociative1234"
