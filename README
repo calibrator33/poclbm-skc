@@ -7,12 +7,7 @@ Installation:
 
 1. Ensure that you are using Python 2.5, 2.6 or 2.7
 
-2. Compile the skeinhash library in the skeinhash folder
-
-   cd skeinhash
-   gcc -fPIC -shared -o skeinhash.so *.c
-   
-3. To monitor your GPU temperature, install the ADL3 library found at
+2. To monitor your GPU temperature, install the ADL3 library found at
    https://github.com/mjmvisser/adl3
    
    Install with "pip install adl3", or copy the 'adl3' folder from
