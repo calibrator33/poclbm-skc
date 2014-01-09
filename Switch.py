@@ -199,7 +199,7 @@ class Switch(object):
                 return True # consume this particular result
             else:
                 self.diff1_found(bytereverse(h[6]), result.target[6])
-                if belowOrEquals(h[:7], result.target[:7]):
+                if belowOrEquals(h[:8], result.target[:8]):
                     is_block = belowOrEquals(h[:7], self.true_target[:7])
                     hash6 = pack('<I', long(h[6])).encode('hex')
                     hash5 = pack('<I', long(h[5])).encode('hex')
